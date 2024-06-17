@@ -1,4 +1,7 @@
 # ago-student
 checking golang
 
-this project uses 
+angular js. 
+golang
+dockercompse
+pgadmin4
