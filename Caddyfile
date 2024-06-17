@@ -1,0 +1,12 @@
+127.0.0.1 {
+  root * /app/webapp/dist/webapp  # Replace with the path to your Angular frontend
+  file_server
+
+  # Proxy API requests to Go backend
+  @api {
+    path /api/*
+  }
+  reverse_proxy @api 127.0.0.1:8080  # Replace 'students-app' with your Docker service name
+
+  
+}

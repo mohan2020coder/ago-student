@@ -1,0 +1,38 @@
+version: '3.11'
+services:
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:5050"
+
+  app:
+    container_name: app_container
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"  # Adjust ports as necessary
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: test_db
